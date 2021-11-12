@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API_APP</name>
+    </assembly>
+    <members>
+        <member name="T:API_APP.Controllers.HomeController">
+            <summary>
+            TEST API CONTROLLER
+            </summary>
+        </member>
+        <member name="M:API_APP.Controllers.HomeController.Get">
+            <summary>
+            Gets VALUES
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
