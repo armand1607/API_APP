@@ -4,6 +4,39 @@
         <name>API_APP</name>
     </assembly>
     <members>
+        <member name="T:API_APP.Controllers.AuthorsController">
+            <summary>
+            Endpoint used to interact with the Authors in the book store's Database
+            </summary>
+        </member>
+        <member name="M:API_APP.Controllers.AuthorsController.GetAuthors">
+            <summary>
+            Get All Authors
+            </summary>
+            <returns>List of Authors</returns>
+        </member>
+        <member name="M:API_APP.Controllers.AuthorsController.Create(API_APP.DTOs.AuthorCreateDTO)">
+            <summary>
+            Pretty much creates an Author
+            </summary>
+            <param name="authorDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API_APP.Controllers.AuthorsController.Update(System.Int32,API_APP.DTOs.AuthorUpdateDTO)">
+            <summary>
+            Updates an Author
+            </summary>
+            <param name="id"></param>
+            <param name="authorDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API_APP.Controllers.AuthorsController.Delete(System.Int32)">
+            <summary>
+            Deletes an Author
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:API_APP.Controllers.HomeController">
             <summary>
             TEST API CONTROLLER

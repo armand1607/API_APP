@@ -62,6 +62,7 @@ namespace API_APP
             });
 
             services.AddSingleton<ILoggerService, LoggerService>();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
 
             services.AddControllers();
         }
