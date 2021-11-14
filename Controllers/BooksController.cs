@@ -2,6 +2,7 @@
 using API_APP.Data;
 using API_APP.DTOs;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,6 +16,8 @@ namespace API_APP.Controllers
     /// Interacts with the Books Table
     /// </summary>
     [Route("api/[controller]")]
+    [Authorize]
+
     [ApiController]
     public class BooksController : ControllerBase
     {
@@ -35,6 +38,9 @@ namespace API_APP.Controllers
         /// </summary>
         /// <returns>A list of All Books</returns>
         [HttpGet]
+
+        [AllowAnonymous]
+
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
@@ -94,6 +100,9 @@ namespace API_APP.Controllers
         /// <param name="bookDTO"></param>
         /// <returns></returns>
         [HttpPost]
+
+        [Authorize(Roles = "Administrator")]
+
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -136,6 +145,9 @@ namespace API_APP.Controllers
         /// <param name="bookDTO"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+
+        [Authorize(Roles = "Administrator")]
+
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -186,9 +198,13 @@ namespace API_APP.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+
+        [Authorize(Roles = "Administrator")]
+
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
         public async Task<IActionResult> Delete(int id)

@@ -2,6 +2,7 @@
 using API_APP.Data;
 using API_APP.DTOs;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,6 +17,7 @@ namespace API_APP.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public class AuthorsController : ControllerBase
@@ -37,6 +39,11 @@ namespace API_APP.Controllers
         /// </summary>
         /// <returns>List of Authors</returns>
         [HttpGet]
+
+        [AllowAnonymous]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAuthors()
         {
             var location = GetControllerActionNames();
@@ -61,6 +68,8 @@ namespace API_APP.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
+
+        [AllowAnonymous]
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -93,8 +102,12 @@ namespace API_APP.Controllers
         /// <param name="authorDTO"></param>
         /// <returns></returns>
         [HttpPost]
+
+        [Authorize(Roles = "Administrator")]
+
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody] AuthorCreateDTO authorDTO)
         {
@@ -138,6 +151,9 @@ namespace API_APP.Controllers
         /// <param name="authorDTO"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+
+        [Authorize(Roles = "Administrator")]
+
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -191,6 +207,9 @@ namespace API_APP.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+
+        [Authorize(Roles = "Administrator")]
+
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
